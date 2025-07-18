@@ -1,8 +1,10 @@
 import React from 'react';
 import useCart from '../../hooks/useCart';
+import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
     const { items, removeFromCart, clearCart } = useCart();
+    const navigate = useNavigate();
 
     if (items.length === 0) {
         return <p className="p-4">Your cart is empty.</p>;
@@ -32,16 +34,15 @@ const CartPage = () => {
                 >
                     Clear Cart
                 </button>
-                <a
-                    href="/checkout"
-                    className="bg-green-600 text-white px-4 py-2 rounded inline-block"
+                <button
+                    className="bg-green-600 text-white px-4 py-2 rounded"
+                    onClick={() => navigate('/checkout')}
                 >
                     Proceed to Checkout
-                </a>
+                </button>
             </div>
         </div>
     );
-
 };
 
 export default CartPage;
