@@ -9,7 +9,7 @@ const morgan = require('morgan');
 const orderRoutes = require('./routes/orderRoutes');
 const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoutes');
-import { errorHandler } from './middleware/errorHandler.js';
+const errorHandler = require('./middleware/errorHandler');
 
 connectDB();
 
