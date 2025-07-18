@@ -16,7 +16,11 @@ connectDB();
 const app = express();
 app.use(
     cors({
-        origin: 'http://localhost:5173', // Explicitly allow frontend origin
+        origin: [
+            'http://localhost:5173',
+            'https://jersey-shop-ecommerce.vercel.app'
+        ],
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], // Explicitly allow frontend origin
         credentials: true,               // Allow cookies, tokens, etc.
     })
 );
