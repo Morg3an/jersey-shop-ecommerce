@@ -13,6 +13,7 @@
   "type": "commonjs",
   "dependencies": {
     "@sentry/node": "^7.92.0",
+    "@sentry/tracing": "^7.120.3",
     "axios": "^1.10.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
