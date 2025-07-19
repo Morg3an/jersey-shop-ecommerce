@@ -5,6 +5,7 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const Sentry = require('@sentry/node');
 
 const orderRoutes = require('./routes/orderRoutes');
 const productRoutes = require('./routes/productRoutes');
@@ -13,7 +14,13 @@ const errorHandler = require('./middleware/errorHandler');
 
 connectDB();
 
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  tracesSampleRate: 1.0,
+});
+
 const app = express();
+app.use(Sentry.Handlers.requestHandler());
 
 app.use(
   cors({
@@ -38,6 +45,7 @@ app.get('/health', (req, res) => {
 
 // Error handler last
 app.use(errorHandler);
+app.use(Sentry.Handlers.errorHandler());
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
